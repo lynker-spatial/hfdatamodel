@@ -140,6 +140,14 @@ It supports:
 
 ---
 
+### Nexus
+| Column        | Type   | Description                                                                 |
+|---------------|--------|-----------------------------------------------------------------------------|
+| `nexus_id`    | int    | Unique identifier for the nexus feature.                                    |
+| `nexus_toid`  | int    | Immediate downstream flopwath id.                                           |
+
+---
+
 ## Relationships (ERD)
 
 ```mermaid
@@ -231,6 +239,11 @@ erDiagram
     text   type
   }
 
+  NEXUS {
+    int    nexus_id
+    int  nexus_toid
+  }
+
   %% Relationships
   FLOWPATHS ||--o{ DIVIDES : owns
   FLOWPATHS ||--o{ HYDROLOCATIONS : snap_of
@@ -241,3 +254,4 @@ erDiagram
   POIS     ||--o| NETWORK  : optional_poi
   FLOWPATHS ||--o{ FLOWLINES : aggregates
   FLOWLINES ||--o| INCREMENTAL_AREA : drains
+  NEXUS    ||--o| FLOWPATHS : pins
