@@ -255,3 +255,4 @@ erDiagram
   FLOWPATHS ||--o{ FLOWLINES : aggregates
   FLOWLINES ||--o| INCREMENTAL_AREA : drains
   NEXUS    ||--o| FLOWPATHS : pins
+  NEXUS    ||--o| FLOWLINES : pins
