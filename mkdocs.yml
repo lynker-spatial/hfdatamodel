@@ -1,0 +1,20 @@
+site_name: hfdatamodel
+site_url: https://lynker-spatial.github.io/hfdatamodel/
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Data model: data_model.md
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: pymdownx.superfences.fence_div_format
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
+  - js/mermaid-init.js

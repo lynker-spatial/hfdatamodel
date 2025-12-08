@@ -14,7 +14,7 @@ It supports:
 
 ## Table Descriptions
 
-**Flowpaths** — The backbone of the model. Each record is a routed stream segment with downstream connectivity (`flowpath_toid`). Flowpaths store physical metrics (length, drainage area, hydrosequence), belong to processing tiles (`vpu_id`), and can be grouped into mainstems. They are the anchor for Divides, POIs, and Hydrolocations.
+**Flowpaths** — The backbone of the model. Each record is a routed stream segment with downstream connectivity (`flowpath_toid`). Flowpaths store physical metrics (length, drainage area, hydrosequence), belong to processing tiles (`vpuid`), and can be grouped into mainstems. They are the anchor for Divides, POIs, and Hydrolocations.
 
 **Divides** — Polygonal catchments linked to flowpaths. Divides provide area context (`areasqkm`) and type categories (`network`, `coastal`, `internal`). In most datasets, Divides map one-to-one with Flowpaths, though generalization can produce one-to-many.
 
@@ -35,24 +35,26 @@ It supports:
 ### Flowpaths
 | Column           | Type   | Description                                                                 |
 |------------------|--------|-----------------------------------------------------------------------------|
-| `flowpath_id`    | int    | Primary key for the flowpath.                                               |
-| `flowpath_toid`  | int    | Downstream `flowpath_id` (self-reference); `NULL` for terminal reaches.     |
-| `vpu_id`         | int    | Vector Processing Unit identifier (processing/tiling key).                  |
-| `poi_id`         | int    | Optional anchoring POI on this flowpath.                                    |
+| `flowpath_id`    | int / text    | Primary key for the flowpath.                                               |
+| `flowpath_toid`  | int / text    | Downstream `flowpath_id` (self-reference); `NULL` for terminal reaches.     |
+| `vpuid`         | text    | Vector Processing Unit identifier (processing/tiling key).                  |
+| `poi_id`         | int / text    | Optional anchoring POI on this flowpath.                                    |
 | `mainstem_id`    | int    | Identifier grouping flowpaths in the same mainstem.                         |
 | `areasqkm`       | float  | Area of the associated divide/catchment (sq km).                            |
 | `lengthkm`       | float  | Flowpath length (km).                                                       |
 | `total_dasqkm`   | float  | Total contributing drainage area at outlet (sq km).                         |
 | `hydroseq`       | int    | Hydrosequence ordering (higher = upstream).                                 |
+| `streamorder`    | int    | Strahler Stream Order                                                       |
+| `slope`          | float  | Slope of flow segment (m/m)                                                 |
 
 ---
 
 ### Divides
 | Column        | Type   | Description                                                                 |
 |---------------|--------|-----------------------------------------------------------------------------|
-| `divide_id`   | int    | Primary key for the divide polygon.                                         |
-| `flowpath_id` | int    | Associated `flowpath_id` (one-to-one, or one-to-many in generalized sets). |
-| `vpu_id`      | int    | Vector Processing Unit identifier.                                          |
+| `divide_id`   | int / text    | Primary key for the divide polygon.                                         |
+| `flowpath_id` | int / text    | Associated `flowpath_id` (one-to-one, or one-to-many in generalized sets). |
+| `vpuid`       | text     | Vector Processing Unit identifier.                                          |
 | `areasqkm`    | float  | Catchment area (sq km).                                                     |
 | `type`        | text   | Divide type (e.g., `network`, `coastal`, `internal`).                       |
 
@@ -61,8 +63,9 @@ It supports:
 ### POIs
 | Column         | Type | Description                                                                 |
 |----------------|------|-----------------------------------------------------------------------------|
-| `poi_id`       | int  | Primary key for a Point of Interest.                                        |
-| `flowpath_id`  | int  | Flowpath this POI anchors to for routing.                                   |
+| `poi_id`       | int / text  | Primary key for a Point of Interest.                                        |
+| `flowpath_id`  | int / text  | Flowpath this POI anchors to for routing.                                   |
+| `vpuid`         | text   | Vector Processing Unit identifier.                                                               |
 | `hl_classes`   | text | Comma-separated list of hydrolocation classes (e.g., `gage,reservoir`).     |
 | `hl_types`     | text | Comma-separated list of hydrolocation source types (e.g., `nwis,huc12`).    |
 | `hl_count`     | int  | Number of hydrolocations aggregated into this POI.                         |
@@ -72,9 +75,9 @@ It supports:
 ### Hydrolocations
 | Column          | Type  | Description                                                                                      |
 |-----------------|-------|--------------------------------------------------------------------------------------------------|
-| `poi_id`        | int   | FK to `POIs.poi_id`.                                                                             |
-| `flowpath_id`   | int   | Flowpath this hydrolocation is snapped to.                                                       |
-| `vpu_id`        | int   | Vector Processing Unit identifier.                                                               |
+| `poi_id`        | int / text   | FK to `POIs.poi_id`.                                                                             |
+| `flowpath_id`   | int / text   | Flowpath this hydrolocation is snapped to.                                                       |
+| `vpuid`         | text   | Vector Processing Unit identifier.                                                               |
 | `hl_type`       | text  | Source/dataset type, e.g., `nwis`, `huc12`, `nbi`, `hilarri`.                                    |
 | `hl_link`       | text  | Native identifier in the source system.                                                          |
 | `hl_class`      | text  | Semantic class of the hydrolocation, e.g., `gage`, `reservoir`, `lake`, `confluence`.            |
@@ -86,16 +89,16 @@ It supports:
 ### Network
 | Column                  | Type   | Description                                                                 |
 |-------------------------|--------|-----------------------------------------------------------------------------|
-| `flowpath_id`           | int    | PK; FK → `flowpaths.flowpath_id`.                                           |
-| `flowpath_toid`         | int    | Downstream flowpath reference.                                              |
+| `flowpath_id`           | int / text    | PK; FK → `flowpaths.flowpath_id`.                                           |
+| `flowpath_toid`         | int / text    | Downstream flowpath reference.                                              |
 | `mainstem_id`           | int    | Mainstem grouping id.                                                       |
 | `hydroseq`              | int    | Flowpath hydrosequence.                                                     |
 | `areasqkm`              | float  | Associated divide area (sq km).                                             |
 | `lengthkm`              | float  | Flowpath length (km).                                                       |
 | `total_dasqkm`          | float  | Total contributing drainage area at outlet (sq km).                         |
-| `vpu_id`                | int    | Vector Processing Unit identifier.                                          |
-| `divide_id`             | int    | FK → `divides.divide_id`.                                                   |
-| `poi_id`                | int    | Optional FK → `pois.poi_id`.                                                |
+| `vpuid`                 | text    | Vector Processing Unit identifier.                                          |
+| `divide_id`             | int / text    | FK → `divides.divide_id`.                                                   |
+| `poi_id`                | int / text    | Optional FK → `pois.poi_id`.                                                |
 | `hl_reference`          | text   | Optional crosswalk to a linked hydrolocation.                               |
 | `hf_id`                 | text   | External Hydrofabric flowpath id.                                           |
 | `hf_toid`               | text   | External Hydrofabric downstream id.                                         |
@@ -103,7 +106,7 @@ It supports:
 | `hf_hydroseq`           | int    | External Hydrofabric hydrosequence.                                         |
 | `flowline_id`           | int    | Underlying flowline id (if multiple are aggregated).                         |
 | `flowline_toid`         | int    | Downstream flowline id.                                                     |
-| `area_id`               | int    | Polygon id of the flowline catchment.                                       |
+| `incremental_area_id`   | int / text    | FK → `incremental_area.incremental_area_id`                                       |
 | `flowline_areasqkm`     | float  | Catchment area (sq km) at flowline scale.                                   |
 | `flowline_hydroseq`     | int    | Hydrosequence at flowline granularity.                                      |
 | `flowline_lengthkm`     | float  | Flowline length (km).                                                       |
@@ -114,27 +117,29 @@ It supports:
 ### Flowlines
 | Column               | Type   | Description                                                                 |
 |----------------------|--------|-----------------------------------------------------------------------------|
-| `flowline_id`        | int    | Unique identifier for the fine-scale flowline.                              |
-| `flowline_toid`      | int    | Immediate downstream flowline id.                                           |
-| `flowpath_id`        | int    | FK → `flowpaths.flowpath_id` that this flowline rolls up into.              |
-| `vpu_id`             | int    | Vector Processing Unit identifier.                                          |
+| `flowline_id`        | int / text    | Unique identifier for the fine-scale flowline.                              |
+| `flowline_toid`      | int / text    | Immediate downstream flowline id.                                           |
+| `flowpath_id`        | int / text    | FK → `flowpaths.flowpath_id` that this flowline rolls up into.              |
+| `vpuid`              | text     | Vector Processing Unit identifier.                                          |
 | `mainstem_id`        | int    | Mainstem grouping id.                                                       |
 | `flowline_hydroseq`  | int    | Hydrosequence at flowline granularity.                                      |
 | `flowpath_hydroseq`  | int    | Hydrosequence of the parent flowpath.                                       |
-| `incremental_area_id`| int    | FK → `incremental_area.incremental_area_id`.                                |
+| `incremental_area_id`| int / text    | FK → `incremental_area.incremental_area_id`.                                |
 | `incremental_areasqkm`| float | Incremental catchment area for this flowline (sq km).                       |
 | `lengthkm`           | float  | Flowline length (km).                                                       |
 | `total_dasqkm`       | float  | Total contributing drainage area at the flowline outlet (sq km).            |
+| `streamorder`        | int    | Strahler Stream Order                                                       |
+| `slope`              | float  | Slope of flow segment (m/m)                                                 |
 
 ---
 
 ### Incremental Area
 | Column                   | Type   | Description                                                                 |
 |--------------------------|--------|-----------------------------------------------------------------------------|
-| `incremental_area_id`    | int    | Unique identifier for the incremental catchment polygon.                    |
+| `incremental_area_id`    | int / text    | Unique identifier for the incremental catchment polygon.                    |
 | `incremental_proportion` | float  | Proportion of the incremental area contributing to a flowline (0–1).        |
-| `flowline_id`            | int    | FK → `flowlines.flowline_id` linked to this incremental catchment.          |
-| `vpu_id`                 | int    | Vector Processing Unit identifier.                                          |
+| `flowline_id`            | int / text    | FK → `flowlines.flowline_id` linked to this incremental catchment.          |
+| `vpuid`                  | text    | Vector Processing Unit identifier.                                          |
 | `areasqkm`               | float  | Incremental catchment area (sq km).                                         |
 | `type`                   | text   | Category of area (e.g., `network`, `coastal`, `internal`).                  |
 
@@ -143,10 +148,9 @@ It supports:
 ### Nexus
 | Column        | Type   | Description                                                                 |
 |---------------|--------|-----------------------------------------------------------------------------|
-| `nexus_id`    | int    | Unique identifier for the nexus feature.                                    |
-| `nexus_toid`  | int    | Immediate downstream flopwath id.                                           |
-| `nexus_toflowline`  | int    | Immediate downstream flopwath id.                                           |
-
+| `nexus_id`    | int / text    | Unique identifier for the nexus feature.                                    |
+| `nexus_toid`  | int / text    | Immediate downstream id.                                           |     
+| `vpuid`       | text    | Vector Processing Unit identifier.                                          |
 ---
 
 ## Relationships (ERD)
@@ -154,37 +158,40 @@ It supports:
 ```mermaid
 erDiagram
   FLOWPATHS {
-    int    flowpath_id
-    int    flowpath_toid
-    int    vpu_id
-    int    poi_id
+    string    flowpath_id
+    string    flowpath_toid
+    text   vpuid
+    string    poi_id
     int    mainstem_id
     float  areasqkm
     float  lengthkm
     float  total_dasqkm
     int    hydroseq
+    int    streamorder
+    float  slope
   }
 
   DIVIDES {
-    int    divide_id
-    int    flowpath_id
-    int    vpu_id
+    string    divide_id
+    string    flowpath_id
+    text   vpuid
     float  areasqkm
     text   type
   }
 
   POIS {
-    int    poi_id
-    int    flowpath_id
+    string    poi_id
+    string    flowpath_id
     text   hl_classes
     text   hl_types
     int    hl_count
+    text vpuid
   }
 
   HYDROLOCATIONS {
-    int    poi_id
-    int    flowpath_id
-    int    vpu_id
+    string    poi_id
+    string    flowpath_id
+    text   vpuid
     text   hl_type
     text   hl_link
     text   hl_class
@@ -193,24 +200,24 @@ erDiagram
   }
 
   NETWORK {
-    int    flowpath_id
-    int    flowpath_toid
+    string    flowpath_id
+    string    flowpath_toid
     int    mainstem_id
     int    hydroseq
     float  areasqkm
     float  lengthkm
     float  total_dasqkm
-    int    vpu_id
-    int    divide_id
-    int    poi_id
+    text   vpuid
+    string    divide_id
+    string    poi_id
     text   hl_reference
-    text   hf_id
-    text   hf_toid
+    string   hf_id
+    string   hf_toid
     text   hf_source
     int    hf_hydroseq
-    int    flowline_id
-    int    flowline_toid
-    int    area_id
+    string    flowline_id
+    string    flowline_toid
+    string    incremental_area_id
     float  flowline_areasqkm
     int    flowline_hydroseq
     float  flowline_lengthkm
@@ -218,43 +225,48 @@ erDiagram
   }
 
   FLOWLINES {
-    int    flowline_id
-    int    flowline_toid
-    int    flowpath_id
-    int    vpu_id
+    string    flowline_id
+    string    flowline_toid
+    string    flowpath_id
+    text   vpuid
     int    mainstem_id
     int    flowline_hydroseq
     int    flowpath_hydroseq
-    int    incremental_area_id
+    string    incremental_area_id
     float  incremental_areasqkm
     float  lengthkm
     float  total_dasqkm
+    int    streamorder
+    float  slope
   }
 
   INCREMENTAL_AREA {
-    int    incremental_area_id
+    string    incremental_area_id
     float  incremental_proportion
-    int    flowline_id
-    int    vpu_id
+    string    flowline_id
+    text   vpuid
     float  areasqkm
     text   type
   }
 
   NEXUS {
-    int  nexus_id
-    int  nexus_toid
-    int  nexus_toflowline
+    string  nexus_id
+    string  nexus_toid
+    text vpuid
   }
 
   %% Relationships
   FLOWPATHS ||--o{ DIVIDES : owns
-  FLOWPATHS ||--o{ HYDROLOCATIONS : snap_of
+  FLOWPATHS ||--o{ POIS : hosts
   POIS ||--o{ HYDROLOCATIONS : aggregates
-  POIS ||--o{ FLOWPATHS : anchors_to
+  FLOWPATHS ||--o{ HYDROLOCATIONS : snapped_to
+  
   FLOWPATHS ||--|| NETWORK : "canonical view"
-  DIVIDES  ||--o| NETWORK  : by_flowpath
-  POIS     ||--o| NETWORK  : optional_poi
+  DIVIDES   ||--o{ NETWORK : referenced_by
+  POIS      ||--o{ NETWORK : optional_poi
+  
   FLOWPATHS ||--o{ FLOWLINES : aggregates
-  FLOWLINES ||--o| INCREMENTAL_AREA : drains
-  NEXUS    ||--o| FLOWPATHS : pins
-  NEXUS    ||--o| FLOWLINES : pins
+  FLOWLINES ||--|| INCREMENTAL_AREA : has
+  
+  NEXUS ||--o{ FLOWPATHS : pins
+  NEXUS ||--o{ FLOWLINES : pins
