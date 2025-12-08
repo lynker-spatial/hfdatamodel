@@ -241,8 +241,9 @@ erDiagram
   }
 
   NEXUS {
-    int    nexus_id
+    int  nexus_id
     int  nexus_toid
+    int  nexus_toflowline
   }
 
   %% Relationships
