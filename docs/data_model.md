@@ -145,6 +145,7 @@ It supports:
 |---------------|--------|-----------------------------------------------------------------------------|
 | `nexus_id`    | int    | Unique identifier for the nexus feature.                                    |
 | `nexus_toid`  | int    | Immediate downstream flopwath id.                                           |
+| `nexus_toflowline`  | int    | Immediate downstream flopwath id.                                           |
 
 ---
 
