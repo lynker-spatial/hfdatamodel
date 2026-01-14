@@ -1,0 +1,133 @@
+/* Make logo larger without increasing navbar height */
+
+/* Final adjustment: large logo, fits neatly in navbar */
+.md-header__button.md-logo {
+  height: 64px !important; /* slightly taller for logo, but not excessive */
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 56px !important; /* logo fits within navbar */
+  width: auto !important;
+  max-height: 56px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* Make MkDocs Material header logo much larger */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 120px !important;
+  width: auto !important;
+  max-height: none !important;
+}
+/* Make the 'spatial' text in the SVG logo 3X larger */
+.spatial {
+  font-size: 144px !important;
+  font-weight: bold;
+  fill: #111;
+  font-family: 'Inter', 'Arial', sans-serif;
+}
+
+/* Accent yellow for buttons, badges, highlights */
+.md-typeset .md-button,
+.md-typeset .md-badge,
+.md-typeset .md-tag {
+  background-color: #FFCC66 !important;
+  color: #1A1A1A !important;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.md-typeset a.md-button:hover {
+  background-color: #ffe699 !important;
+  color: #1A1A1A !important;
+}
+/* FlowFabric API - Brand color palette (refined) for MkDocs Material */
+
+:root {
+  --md-primary-fg-color: #66CCFF;
+  --md-primary-bg-color: #1A1A1A;
+  --md-accent-fg-color: #FFCC66;
+  --md-default-bg-color: #fff;
+  --md-default-fg-color: #1A1A1A;
+  --md-code-bg-color: #fafafa;
+  --md-code-fg-color: #1A1A1A;
+  --md-typeset-a-color: #52b8eb;
+}
+
+/* Headings and typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--md-primary-bg-color);
+  font-weight: 600;
+}
+
+body, .md-typeset {
+  color: var(--md-default-fg-color);
+  background: var(--md-default-bg-color);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+/* Links */
+a {
+  color: var(--md-typeset-a-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--md-primary-fg-color);
+  text-decoration: underline;
+}
+
+/* Tables */
+table th {
+  color: var(--md-primary-bg-color);
+  font-weight: 600;
+}
+table td {
+  color: var(--md-default-fg-color);
+}
+
+/* Code blocks */
+pre, code {
+  background: var(--md-code-bg-color);
+  color: var(--md-code-fg-color);
+  border-radius: 6px;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #9FB9C6;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #66CCFF;
+}
+
+/* Footer styling */
+.md-footer {
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+  border-top: 2px solid #f0f0f0;
+  color: #666;
+  font-size: 14px;
+}
+.md-footer a {
+  color: #52b8eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+.md-footer a:hover {
+  color: #66CCFF;
+  text-decoration: underline;
+}

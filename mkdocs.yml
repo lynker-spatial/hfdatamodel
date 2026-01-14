@@ -1,8 +1,14 @@
+
 site_name: Modeling Fabric
 site_url: https://lynker-spatial.github.io/hfdatamodel/
 
 theme:
   name: material
+  logo: branding/logo.svg
+  custom_dir: overrides
+
+extra_css:
+  - css/flowfabric-brand.css
 
 nav:
   - Home: index.md

@@ -1,13 +1,16 @@
 # Lynker Hydrofabric Data Model
-
 > **Scope:** Defines the schema and relationships for the Hydrofabric network — integrating flowpaths, catchments, points of interest (POIs), and external hydrolocation sources into a consistent, query-friendly model.
 
 ## Overview
 This model provides the canonical representation of a routed river network with associated catchments and reference points.  
 It supports:
-- **Hydrologic analysis** (flowpath connectivity, drainage accumulation).
+
+- **Hydrologic analysis** (flowpath connectivity, drainage accumulation). 
+
 - **Catchment delineation** (divides and incremental areas).
+
 - **External integration** (gauges, reservoirs, and other hydrolocations).
+
 - **Optimized queries** through the denormalized `Network` table.
 
 ---
@@ -264,6 +267,12 @@ NEXUS ||--o{ FLOWLINES : pins
 @enduml
 ```
 
-Run: `plantuml -tpng docs/img/erd.puml` to generate
+
+---
+
+<div align="center" style="margin-top: 2em; margin-bottom: 2em; color: #777; font-family: 'Inter', 'Arial', sans-serif;">
+  <strong>Lynker Hydrofabric</strong> v1.0.0 | Built by <a href="https://lynker-spatial.github.io/hfdatamodel/" style="color: #52b8eb; text-decoration: none;">Lynker Spatial</a><br>
+  <span style="font-size: 1.1em;">A High Perfomace Felxable Modeling Fabric for Hydrologic Science</span>
+</div>
 
 
