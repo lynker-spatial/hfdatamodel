@@ -1,0 +1,104 @@
+@startuml
+entity FLOWPATHS {
+  * flowpath_id : string
+  * flowpath_toid : string
+  * vpuid : text
+  * poi_id : string
+  * mainstem_id : int
+  * areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * hydroseq : int
+  * streamorder : int
+  * slope : float
+}
+entity DIVIDES {
+  * divide_id : string
+  * flowpath_id : string
+  * vpuid : text
+  * areasqkm : float
+  * type : text
+}
+entity POIS {
+  * poi_id : string
+  * flowpath_id : string
+  * hl_classes : text
+  * hl_types : text
+  * hl_count : int
+  * vpuid : text
+}
+entity HYDROLOCATIONS {
+  * poi_id : string
+  * flowpath_id : string
+  * vpuid : text
+  * hl_type : text
+  * hl_link : text
+  * hl_class : text
+  * hl_reference : text
+  * hl_uri : text
+}
+entity NETWORK {
+  * flowpath_id : string
+  * flowpath_toid : string
+  * mainstem_id : int
+  * hydroseq : int
+  * areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * vpuid : text
+  * divide_id : string
+  * poi_id : string
+  * hl_reference : text
+  * hf_id : string
+  * hf_toid : string
+  * hf_source : text
+  * hf_hydroseq : int
+  * flowline_id : string
+  * flowline_toid : string
+  * incremental_area_id : string
+  * flowline_areasqkm : float
+  * flowline_hydroseq : int
+  * flowline_lengthkm : float
+  * flowline_total_dasqkm : float
+}
+entity FLOWLINES {
+  * flowline_id : string
+  * flowline_toid : string
+  * flowpath_id : string
+  * vpuid : text
+  * mainstem_id : int
+  * flowline_hydroseq : int
+  * flowpath_hydroseq : int
+  * incremental_area_id : string
+  * incremental_areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * streamorder : int
+  * slope : float
+}
+entity INCREMENTAL_AREA {
+  * incremental_area_id : string
+  * incremental_proportion : float
+  * flowline_id : string
+  * vpuid : text
+  * areasqkm : float
+  * type : text
+}
+entity NEXUS {
+  * nexus_id : string
+  * nexus_toid : string
+  * vpuid : text
+}
+
+FLOWPATHS ||--o{ DIVIDES : owns
+FLOWPATHS ||--o{ POIS : hosts
+POIS ||--o{ HYDROLOCATIONS : aggregates
+FLOWPATHS ||--o{ HYDROLOCATIONS : snapped_to
+FLOWPATHS ||--|| NETWORK : "canonical view"
+DIVIDES ||--o{ NETWORK : referenced_by
+POIS ||--o{ NETWORK : optional_poi
+FLOWPATHS ||--o{ FLOWLINES : aggregates
+FLOWLINES ||--|| INCREMENTAL_AREA : has
+NEXUS ||--o{ FLOWPATHS : pins
+NEXUS ||--o{ FLOWLINES : pins
+@enduml
