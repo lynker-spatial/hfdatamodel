@@ -1,0 +1,1295 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://lynker-spatial.github.io/hfdatamodel/data_model/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Data model - Modeling Fabric</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/flowfabric-brand.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lynker-hydrofabric-data-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Modeling Fabric" class="md-header__button md-logo" aria-label="Modeling Fabric" data-md-component="logo">
+      
+  <img src="../branding/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Modeling Fabric
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Modeling Fabric" class="md-nav__button md-logo" aria-label="Modeling Fabric" data-md-component="logo">
+      
+  <img src="../branding/logo.svg" alt="logo">
+
+    </a>
+    Modeling Fabric
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table Descriptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entities-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entities &amp; Attributes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entities &amp; Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flowpaths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flowpaths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#divides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Divides
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pois" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hydrolocations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hydrolocations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flowlines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flowlines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incremental-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incremental Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nexus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nexus
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationships-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationships (ERD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table Descriptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entities-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entities &amp; Attributes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entities &amp; Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flowpaths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flowpaths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#divides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Divides
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pois" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hydrolocations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hydrolocations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flowlines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flowlines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incremental-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incremental Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nexus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nexus
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationships-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationships (ERD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lynker-hydrofabric-data-model">Lynker Hydrofabric Data Model</h1>
+<blockquote>
+<p><strong>Scope:</strong> Defines the schema and relationships for the Hydrofabric network — integrating flowpaths, catchments, points of interest (POIs), and external hydrolocation sources into a consistent, query-friendly model.</p>
+</blockquote>
+<h2 id="overview">Overview</h2>
+<p>This model provides the canonical representation of a routed river network with associated catchments and reference points.<br />
+It supports:</p>
+<ul>
+<li>
+<p><strong>Hydrologic analysis</strong> (flowpath connectivity, drainage accumulation). </p>
+</li>
+<li>
+<p><strong>Catchment delineation</strong> (divides and incremental areas).</p>
+</li>
+<li>
+<p><strong>External integration</strong> (gauges, reservoirs, and other hydrolocations).</p>
+</li>
+<li>
+<p><strong>Optimized queries</strong> through the denormalized <code>Network</code> table.</p>
+</li>
+</ul>
+<hr />
+<h2 id="table-descriptions">Table Descriptions</h2>
+<p><strong>Flowpaths</strong> — The backbone of the model. Each record is a routed stream segment with downstream connectivity (<code>flowpath_toid</code>). Flowpaths store physical metrics (length, drainage area, hydrosequence), belong to processing tiles (<code>vpuid</code>), and can be grouped into mainstems. They are the anchor for Divides, POIs, and Hydrolocations.</p>
+<p><strong>Divides</strong> — Polygonal catchments linked to flowpaths. Divides provide area context (<code>areasqkm</code>) and type categories (<code>network</code>, <code>coastal</code>, <code>internal</code>). In most datasets, Divides map one-to-one with Flowpaths, though generalization can produce one-to-many.</p>
+<p><strong>POIs</strong> — Logical anchor points (e.g., stream gages, reservoirs, confluences). POIs snap to Flowpaths for routing and serve as aggregation nodes for Hydrolocations. Rollup fields summarize hydrolocation classes, types, and counts.</p>
+<p><strong>Hydrolocations</strong> — Individual features from external systems (NWIS, HUC12, NBI, HiLARRI, etc.). Hydrolocations snap to Flowpaths and group under POIs. They carry both <strong>source metadata</strong> (<code>hl_type</code>, <code>hl_link</code>) and <strong>semantic class</strong> (<code>hl_class</code>, e.g., gage, reservoir), with unique crosswalk identifiers (<code>hl_reference</code>).</p>
+<p><strong>Network</strong> — A denormalized, read-optimized view combining Flowpath, Divide, POI, Hydrolocation, and Hydrofabric crosswalks. It mirrors topology (<code>flowpath_id</code>, <code>flowpath_toid</code>, <code>hydroseq</code>) and exposes convenience fields (<code>hf_*</code>, <code>flowline_*</code>) for faster queries without multiple joins.</p>
+<p><strong>Flowlines</strong> — Fine-scale routing primitives underlying Flowpaths. Each Flowline has its own downstream pointer, hydrosequence, and incremental catchment. They roll up into Flowpaths but preserve detailed granularity for advanced analyses.</p>
+<p><strong>Incremental Area</strong> — Polygonal catchments representing direct contributing areas to Flowlines. These support area partitioning and proportional allocation across flowline networks.</p>
+<hr />
+<h2 id="entities-attributes">Entities &amp; Attributes</h2>
+<h3 id="flowpaths">Flowpaths</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flowpath_id</code></td>
+<td>int / text</td>
+<td>Primary key for the flowpath.</td>
+</tr>
+<tr>
+<td><code>flowpath_toid</code></td>
+<td>int / text</td>
+<td>Downstream <code>flowpath_id</code> (self-reference); <code>NULL</code> for terminal reaches.</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier (processing/tiling key).</td>
+</tr>
+<tr>
+<td><code>poi_id</code></td>
+<td>int / text</td>
+<td>Optional anchoring POI on this flowpath.</td>
+</tr>
+<tr>
+<td><code>mainstem_id</code></td>
+<td>int</td>
+<td>Identifier grouping flowpaths in the same mainstem.</td>
+</tr>
+<tr>
+<td><code>areasqkm</code></td>
+<td>float</td>
+<td>Area of the associated divide/catchment (sq km).</td>
+</tr>
+<tr>
+<td><code>lengthkm</code></td>
+<td>float</td>
+<td>Flowpath length (km).</td>
+</tr>
+<tr>
+<td><code>total_dasqkm</code></td>
+<td>float</td>
+<td>Total contributing drainage area at outlet (sq km).</td>
+</tr>
+<tr>
+<td><code>hydroseq</code></td>
+<td>int</td>
+<td>Hydrosequence ordering (higher = upstream).</td>
+</tr>
+<tr>
+<td><code>streamorder</code></td>
+<td>int</td>
+<td>Strahler Stream Order</td>
+</tr>
+<tr>
+<td><code>slope</code></td>
+<td>float</td>
+<td>Slope of flow segment (m/m)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="divides">Divides</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>divide_id</code></td>
+<td>int / text</td>
+<td>Primary key for the divide polygon.</td>
+</tr>
+<tr>
+<td><code>flowpath_id</code></td>
+<td>int / text</td>
+<td>Associated <code>flowpath_id</code> (one-to-one, or one-to-many in generalized sets).</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier.</td>
+</tr>
+<tr>
+<td><code>areasqkm</code></td>
+<td>float</td>
+<td>Catchment area (sq km).</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>text</td>
+<td>Divide type (e.g., <code>network</code>, <code>coastal</code>, <code>internal</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="pois">POIs</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>poi_id</code></td>
+<td>int / text</td>
+<td>Primary key for a Point of Interest.</td>
+</tr>
+<tr>
+<td><code>flowpath_id</code></td>
+<td>int / text</td>
+<td>Flowpath this POI anchors to for routing.</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier.</td>
+</tr>
+<tr>
+<td><code>hl_classes</code></td>
+<td>text</td>
+<td>Comma-separated list of hydrolocation classes (e.g., <code>gage,reservoir</code>).</td>
+</tr>
+<tr>
+<td><code>hl_types</code></td>
+<td>text</td>
+<td>Comma-separated list of hydrolocation source types (e.g., <code>nwis,huc12</code>).</td>
+</tr>
+<tr>
+<td><code>hl_count</code></td>
+<td>int</td>
+<td>Number of hydrolocations aggregated into this POI.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="hydrolocations">Hydrolocations</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>poi_id</code></td>
+<td>int / text</td>
+<td>FK to <code>POIs.poi_id</code>.</td>
+</tr>
+<tr>
+<td><code>flowpath_id</code></td>
+<td>int / text</td>
+<td>Flowpath this hydrolocation is snapped to.</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier.</td>
+</tr>
+<tr>
+<td><code>hl_type</code></td>
+<td>text</td>
+<td>Source/dataset type, e.g., <code>nwis</code>, <code>huc12</code>, <code>nbi</code>, <code>hilarri</code>.</td>
+</tr>
+<tr>
+<td><code>hl_link</code></td>
+<td>text</td>
+<td>Native identifier in the source system.</td>
+</tr>
+<tr>
+<td><code>hl_class</code></td>
+<td>text</td>
+<td>Semantic class of the hydrolocation, e.g., <code>gage</code>, <code>reservoir</code>, <code>lake</code>, <code>confluence</code>.</td>
+</tr>
+<tr>
+<td><code>hl_reference</code></td>
+<td>text</td>
+<td>Stable cross-system identifier, typically <code>{hl_type}-{hl_link}</code>. Unique across the model.</td>
+</tr>
+<tr>
+<td><code>hl_uri</code></td>
+<td>text</td>
+<td>Optional resolvable URI to the hydrolocation’s online resource.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="network">Network</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flowpath_id</code></td>
+<td>int / text</td>
+<td>PK; FK → <code>flowpaths.flowpath_id</code>.</td>
+</tr>
+<tr>
+<td><code>flowpath_toid</code></td>
+<td>int / text</td>
+<td>Downstream flowpath reference.</td>
+</tr>
+<tr>
+<td><code>mainstem_id</code></td>
+<td>int</td>
+<td>Mainstem grouping id.</td>
+</tr>
+<tr>
+<td><code>hydroseq</code></td>
+<td>int</td>
+<td>Flowpath hydrosequence.</td>
+</tr>
+<tr>
+<td><code>areasqkm</code></td>
+<td>float</td>
+<td>Associated divide area (sq km).</td>
+</tr>
+<tr>
+<td><code>lengthkm</code></td>
+<td>float</td>
+<td>Flowpath length (km).</td>
+</tr>
+<tr>
+<td><code>total_dasqkm</code></td>
+<td>float</td>
+<td>Total contributing drainage area at outlet (sq km).</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier.</td>
+</tr>
+<tr>
+<td><code>divide_id</code></td>
+<td>int / text</td>
+<td>FK → <code>divides.divide_id</code>.</td>
+</tr>
+<tr>
+<td><code>poi_id</code></td>
+<td>int / text</td>
+<td>Optional FK → <code>pois.poi_id</code>.</td>
+</tr>
+<tr>
+<td><code>hl_reference</code></td>
+<td>text</td>
+<td>Optional crosswalk to a linked hydrolocation.</td>
+</tr>
+<tr>
+<td><code>hf_id</code></td>
+<td>text</td>
+<td>External Hydrofabric flowpath id.</td>
+</tr>
+<tr>
+<td><code>hf_toid</code></td>
+<td>text</td>
+<td>External Hydrofabric downstream id.</td>
+</tr>
+<tr>
+<td><code>hf_source</code></td>
+<td>text</td>
+<td>Source label for <code>hf_*</code> fields (e.g., <code>nhdplusv2</code>, <code>merit</code>).</td>
+</tr>
+<tr>
+<td><code>hf_hydroseq</code></td>
+<td>int</td>
+<td>External Hydrofabric hydrosequence.</td>
+</tr>
+<tr>
+<td><code>flowline_id</code></td>
+<td>int</td>
+<td>Underlying flowline id (if multiple are aggregated).</td>
+</tr>
+<tr>
+<td><code>flowline_toid</code></td>
+<td>int</td>
+<td>Downstream flowline id.</td>
+</tr>
+<tr>
+<td><code>incremental_area_id</code></td>
+<td>int / text</td>
+<td>FK → <code>incremental_area.incremental_area_id</code></td>
+</tr>
+<tr>
+<td><code>flowline_areasqkm</code></td>
+<td>float</td>
+<td>Catchment area (sq km) at flowline scale.</td>
+</tr>
+<tr>
+<td><code>flowline_hydroseq</code></td>
+<td>int</td>
+<td>Hydrosequence at flowline granularity.</td>
+</tr>
+<tr>
+<td><code>flowline_lengthkm</code></td>
+<td>float</td>
+<td>Flowline length (km).</td>
+</tr>
+<tr>
+<td><code>flowline_total_dasqkm</code></td>
+<td>float</td>
+<td>Total drainage area at flowline outlet (sq km).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="flowlines">Flowlines</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flowline_id</code></td>
+<td>int / text</td>
+<td>Unique identifier for the fine-scale flowline.</td>
+</tr>
+<tr>
+<td><code>flowline_toid</code></td>
+<td>int / text</td>
+<td>Immediate downstream flowline id.</td>
+</tr>
+<tr>
+<td><code>flowpath_id</code></td>
+<td>int / text</td>
+<td>FK → <code>flowpaths.flowpath_id</code> that this flowline rolls up into.</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier.</td>
+</tr>
+<tr>
+<td><code>mainstem_id</code></td>
+<td>int</td>
+<td>Mainstem grouping id.</td>
+</tr>
+<tr>
+<td><code>flowline_hydroseq</code></td>
+<td>int</td>
+<td>Hydrosequence at flowline granularity.</td>
+</tr>
+<tr>
+<td><code>flowpath_hydroseq</code></td>
+<td>int</td>
+<td>Hydrosequence of the parent flowpath.</td>
+</tr>
+<tr>
+<td><code>incremental_area_id</code></td>
+<td>int / text</td>
+<td>FK → <code>incremental_area.incremental_area_id</code>.</td>
+</tr>
+<tr>
+<td><code>incremental_areasqkm</code></td>
+<td>float</td>
+<td>Incremental catchment area for this flowline (sq km).</td>
+</tr>
+<tr>
+<td><code>lengthkm</code></td>
+<td>float</td>
+<td>Flowline length (km).</td>
+</tr>
+<tr>
+<td><code>total_dasqkm</code></td>
+<td>float</td>
+<td>Total contributing drainage area at the flowline outlet (sq km).</td>
+</tr>
+<tr>
+<td><code>streamorder</code></td>
+<td>int</td>
+<td>Strahler Stream Order</td>
+</tr>
+<tr>
+<td><code>slope</code></td>
+<td>float</td>
+<td>Slope of flow segment (m/m)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="incremental-area">Incremental Area</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>incremental_area_id</code></td>
+<td>int / text</td>
+<td>Unique identifier for the incremental catchment polygon.</td>
+</tr>
+<tr>
+<td><code>incremental_proportion</code></td>
+<td>float</td>
+<td>Proportion of the incremental area contributing to a flowline (0–1).</td>
+</tr>
+<tr>
+<td><code>flowline_id</code></td>
+<td>int / text</td>
+<td>FK → <code>flowlines.flowline_id</code> linked to this incremental catchment.</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier.</td>
+</tr>
+<tr>
+<td><code>areasqkm</code></td>
+<td>float</td>
+<td>Incremental catchment area (sq km).</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>text</td>
+<td>Category of area (e.g., <code>network</code>, <code>coastal</code>, <code>internal</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="nexus">Nexus</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nexus_id</code></td>
+<td>int / text</td>
+<td>Unique identifier for the nexus feature.</td>
+</tr>
+<tr>
+<td><code>nexus_toid</code></td>
+<td>int / text</td>
+<td>Immediate downstream id.</td>
+</tr>
+<tr>
+<td><code>vpuid</code></td>
+<td>text</td>
+<td>Vector Processing Unit identifier.</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="relationships-erd">Relationships (ERD)</h2>
+<p><img alt="ERD" src="../img/erd.png" /></p>
+<pre class="plantuml"><code>@startuml
+entity FLOWPATHS {
+  * flowpath_id : string
+  * flowpath_toid : string
+  * vpuid : text
+  * poi_id : string
+  * mainstem_id : int
+  * areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * hydroseq : int
+  * streamorder : int
+  * slope : float
+}
+entity DIVIDES {
+  * divide_id : string
+  * flowpath_id : string
+  * vpuid : text
+  * areasqkm : float
+  * type : text
+}
+entity POIS {
+  * poi_id : string
+  * flowpath_id : string
+  * hl_classes : text
+  * hl_types : text
+  * hl_count : int
+  * vpuid : text
+}
+entity HYDROLOCATIONS {
+  * poi_id : string
+  * flowpath_id : string
+  * vpuid : text
+  * hl_type : text
+  * hl_link : text
+  * hl_class : text
+  * hl_reference : text
+  * hl_uri : text
+}
+entity NETWORK {
+  * flowpath_id : string
+  * flowpath_toid : string
+  * mainstem_id : int
+  * hydroseq : int
+  * areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * vpuid : text
+  * divide_id : string
+  * poi_id : string
+  * hl_reference : text
+  * hf_id : string
+  * hf_toid : string
+  * hf_source : text
+  * hf_hydroseq : int
+  * flowline_id : string
+  * flowline_toid : string
+  * incremental_area_id : string
+  * flowline_areasqkm : float
+  * flowline_hydroseq : int
+  * flowline_lengthkm : float
+  * flowline_total_dasqkm : float
+}
+entity FLOWLINES {
+  * flowline_id : string
+  * flowline_toid : string
+  * flowpath_id : string
+  * vpuid : text
+  * mainstem_id : int
+  * flowline_hydroseq : int
+  * flowpath_hydroseq : int
+  * incremental_area_id : string
+  * incremental_areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * streamorder : int
+  * slope : float
+}
+entity INCREMENTAL_AREA {
+  * incremental_area_id : string
+  * incremental_proportion : float
+  * flowline_id : string
+  * vpuid : text
+  * areasqkm : float
+  * type : text
+}
+entity NEXUS {
+  * nexus_id : string
+  * nexus_toid : string
+  * vpuid : text
+}
+
+FLOWPATHS ||--o{ DIVIDES : owns
+FLOWPATHS ||--o{ POIS : hosts
+POIS ||--o{ HYDROLOCATIONS : aggregates
+FLOWPATHS ||--o{ HYDROLOCATIONS : snapped_to
+FLOWPATHS ||--|| NETWORK : "canonical view"
+DIVIDES ||--o{ NETWORK : referenced_by
+POIS ||--o{ NETWORK : optional_poi
+FLOWPATHS ||--o{ FLOWLINES : aggregates
+FLOWLINES ||--|| INCREMENTAL_AREA : has
+NEXUS ||--o{ FLOWPATHS : pins
+NEXUS ||--o{ FLOWLINES : pins
+@enduml</code></pre>
+<hr />
+<div align="center" style="margin-top: 2em; margin-bottom: 2em; color: #777; font-family: 'Inter', 'Arial', sans-serif;">
+  <strong>Lynker Hydrofabric</strong> v1.0.0 | Built by <a href="https://lynker-spatial.github.io/hfdatamodel/" style="color: #52b8eb; text-decoration: none;">Lynker Spatial</a><br>
+  <span style="font-size: 1.1em;">A High Perfomace Felxable Modeling Fabric for Hydrologic Science</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+  
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="md-footer-custom" style="text-align: center; margin: 2em 0; color: #777; font-family: 'Inter', 'Arial', sans-serif;">
+  <strong>Lynker Hydrofabric Data Model</strong> v1.0.0 | Built by <a href="https://lynker-spatial.github.io/hfdatamodel/" style="color: #52b8eb; text-decoration: none;">Lynker Spatial</a><br>
+  <span style="font-size: 1.1em;">A high-performance, flexible modeling fabric for hydrologic science</span>
+</div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
