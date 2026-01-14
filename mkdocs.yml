@@ -1,4 +1,4 @@
-site_name: Modeling Fabric Data Model
+site_name: Modeling Fabric
 site_url: https://lynker-spatial.github.io/hfdatamodel/
 
 theme:
@@ -11,10 +11,11 @@ nav:
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: pymdownx.superfences.fence_div_format
+        - name: plantuml
+          class: plantuml
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
-extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
-  - js/mermaid-init.js
+plugins:
+  - search
+  - diagrams
+

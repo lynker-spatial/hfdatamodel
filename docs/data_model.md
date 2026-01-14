@@ -155,119 +155,115 @@ It supports:
 
 ## Relationships (ERD)
 
-```mermaid
-erDiagram
-  FLOWPATHS {
-    string    flowpath_id
-    string    flowpath_toid
-    text   vpuid
-    string    poi_id
-    int    mainstem_id
-    float  areasqkm
-    float  lengthkm
-    float  total_dasqkm
-    int    hydroseq
-    int    streamorder
-    float  slope
-  }
+![ERD](img/erd.png)
 
-  DIVIDES {
-    string    divide_id
-    string    flowpath_id
-    text   vpuid
-    float  areasqkm
-    text   type
-  }
+```plantuml
+@startuml
+entity FLOWPATHS {
+  * flowpath_id : string
+  * flowpath_toid : string
+  * vpuid : text
+  * poi_id : string
+  * mainstem_id : int
+  * areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * hydroseq : int
+  * streamorder : int
+  * slope : float
+}
+entity DIVIDES {
+  * divide_id : string
+  * flowpath_id : string
+  * vpuid : text
+  * areasqkm : float
+  * type : text
+}
+entity POIS {
+  * poi_id : string
+  * flowpath_id : string
+  * hl_classes : text
+  * hl_types : text
+  * hl_count : int
+  * vpuid : text
+}
+entity HYDROLOCATIONS {
+  * poi_id : string
+  * flowpath_id : string
+  * vpuid : text
+  * hl_type : text
+  * hl_link : text
+  * hl_class : text
+  * hl_reference : text
+  * hl_uri : text
+}
+entity NETWORK {
+  * flowpath_id : string
+  * flowpath_toid : string
+  * mainstem_id : int
+  * hydroseq : int
+  * areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * vpuid : text
+  * divide_id : string
+  * poi_id : string
+  * hl_reference : text
+  * hf_id : string
+  * hf_toid : string
+  * hf_source : text
+  * hf_hydroseq : int
+  * flowline_id : string
+  * flowline_toid : string
+  * incremental_area_id : string
+  * flowline_areasqkm : float
+  * flowline_hydroseq : int
+  * flowline_lengthkm : float
+  * flowline_total_dasqkm : float
+}
+entity FLOWLINES {
+  * flowline_id : string
+  * flowline_toid : string
+  * flowpath_id : string
+  * vpuid : text
+  * mainstem_id : int
+  * flowline_hydroseq : int
+  * flowpath_hydroseq : int
+  * incremental_area_id : string
+  * incremental_areasqkm : float
+  * lengthkm : float
+  * total_dasqkm : float
+  * streamorder : int
+  * slope : float
+}
+entity INCREMENTAL_AREA {
+  * incremental_area_id : string
+  * incremental_proportion : float
+  * flowline_id : string
+  * vpuid : text
+  * areasqkm : float
+  * type : text
+}
+entity NEXUS {
+  * nexus_id : string
+  * nexus_toid : string
+  * vpuid : text
+}
 
-  POIS {
-    string    poi_id
-    string    flowpath_id
-    text   hl_classes
-    text   hl_types
-    int    hl_count
-    text vpuid
-  }
-
-  HYDROLOCATIONS {
-    string    poi_id
-    string    flowpath_id
-    text   vpuid
-    text   hl_type
-    text   hl_link
-    text   hl_class
-    text   hl_reference
-    text   hl_uri
-  }
-
-  NETWORK {
-    string    flowpath_id
-    string    flowpath_toid
-    int    mainstem_id
-    int    hydroseq
-    float  areasqkm
-    float  lengthkm
-    float  total_dasqkm
-    text   vpuid
-    string    divide_id
-    string    poi_id
-    text   hl_reference
-    string   hf_id
-    string   hf_toid
-    text   hf_source
-    int    hf_hydroseq
-    string    flowline_id
-    string    flowline_toid
-    string    incremental_area_id
-    float  flowline_areasqkm
-    int    flowline_hydroseq
-    float  flowline_lengthkm
-    float  flowline_total_dasqkm
-  }
-
-  FLOWLINES {
-    string    flowline_id
-    string    flowline_toid
-    string    flowpath_id
-    text   vpuid
-    int    mainstem_id
-    int    flowline_hydroseq
-    int    flowpath_hydroseq
-    string    incremental_area_id
-    float  incremental_areasqkm
-    float  lengthkm
-    float  total_dasqkm
-    int    streamorder
-    float  slope
-  }
-
-  INCREMENTAL_AREA {
-    string    incremental_area_id
-    float  incremental_proportion
-    string    flowline_id
-    text   vpuid
-    float  areasqkm
-    text   type
-  }
-
-  NEXUS {
-    string  nexus_id
-    string  nexus_toid
-    text vpuid
-  }
-
-  %% Relationships
-  FLOWPATHS ||--o{ DIVIDES : owns
-  FLOWPATHS ||--o{ POIS : hosts
-  POIS ||--o{ HYDROLOCATIONS : aggregates
-  FLOWPATHS ||--o{ HYDROLOCATIONS : snapped_to
-  
-  FLOWPATHS ||--|| NETWORK : "canonical view"
-  DIVIDES   ||--o{ NETWORK : referenced_by
-  POIS      ||--o{ NETWORK : optional_poi
-  
-  FLOWPATHS ||--o{ FLOWLINES : aggregates
-  FLOWLINES ||--|| INCREMENTAL_AREA : has
-  
-  NEXUS ||--o{ FLOWPATHS : pins
-  NEXUS ||--o{ FLOWLINES : pins
+FLOWPATHS ||--o{ DIVIDES : owns
+FLOWPATHS ||--o{ POIS : hosts
+POIS ||--o{ HYDROLOCATIONS : aggregates
+FLOWPATHS ||--o{ HYDROLOCATIONS : snapped_to
+FLOWPATHS ||--|| NETWORK : "canonical view"
+DIVIDES ||--o{ NETWORK : referenced_by
+POIS ||--o{ NETWORK : optional_poi
+FLOWPATHS ||--o{ FLOWLINES : aggregates
+FLOWLINES ||--|| INCREMENTAL_AREA : has
+NEXUS ||--o{ FLOWPATHS : pins
+NEXUS ||--o{ FLOWLINES : pins
+@enduml
 ```
+
+Run: `plantuml -tpng docs/img/erd.puml` to generate
+
+
