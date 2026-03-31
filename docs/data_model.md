@@ -84,6 +84,7 @@ It supports:
 | `hl_type`       | text  | Source/dataset type, e.g., `nwis`, `huc12`, `nbi`, `hilarri`.                                    |
 | `hl_link`       | text  | Native identifier in the source system.                                                          |
 | `hl_class`      | text  | Semantic class of the hydrolocation, e.g., `gage`, `reservoir`, `lake`, `confluence`.            |
+| `hl_source`      | text  | Where did the source data come from   |
 | `hl_reference`  | text  | Stable cross-system identifier, typically `{hl_type}-{hl_link}`. Unique across the model.        |
 | `hl_uri`        | text  | Optional resolvable URI to the hydrolocation’s online resource.                                  |
 
